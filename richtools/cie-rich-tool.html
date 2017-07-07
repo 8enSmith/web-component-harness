@@ -1,0 +1,80 @@
+<link rel="import" href="https://polygit.org/components/polymer/polymer-element.html">
+<!-- import the iron-input element -->
+<link rel="import" href="https://polygit.org/components/iron-input/iron-input.html">
+
+<dom-module id="cie-rich-tool">
+
+  <template>
+
+    <style>
+      .AnswerColour {
+        color: var(--answer-color, red);
+      }
+    </style>
+
+    <p>Question: {{question}}</p>
+    <label>Answer: </label>
+
+    <iron-input bind-value="{{userAnswer}}">
+      <input is="iron-input" placeholder="type answer...">
+    </iron-input>
+
+    <template is="dom-if" if="{{showAnswer}}">
+      <p class='AnswerColour'>{{evaluatedAnswer}}</p>
+    </template>
+
+    <button on-click="handleClick">Submit Answer</button>
+
+  </template>
+
+  <script>
+    class CieRichTool extends Polymer.Element {
+
+      static get is() {
+        return "cie-rich-tool";
+      }
+
+      static get properties() {
+        return {
+          // Question defined via element attribute
+          question: String,
+          // Correct answer defined via element attribute (note: Use element name as follows 'correct-answer')
+          correctAnswer: String,
+          userAnswer: {
+            type: String,
+            value: ''
+          },
+          evaluatedAnswer: String,
+          showAnswer: Boolean
+        };
+      }
+
+      handleClick() {
+        if (this.userAnswer === '') {
+          this.evaluatedAnswer = '';
+          return;
+        }
+
+        var properties = CieRichTool.properties;
+
+        if (this.correctAnswer.toUpperCase() === this.userAnswer.toUpperCase()) {
+
+          this.updateStyles({
+            '--answer-color': 'green'
+          });
+          this.evaluatedAnswer = 'Correct';
+          return;
+        }
+
+        this.updateStyles({
+          '--answer-color': 'red'
+        });
+        this.evaluatedAnswer = 'Incorrect';
+      }
+
+    }
+
+    customElements.define(CieRichTool.is, CieRichTool);
+  </script>
+
+</dom-module>

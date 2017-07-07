@@ -1,0 +1,9 @@
+html
+  head
+    title= title
+    link(rel='import' href='richtools/cie-rich-tool.html')
+  body
+    - var attribute_string = ' '
+    each attribute in attributes
+        - attribute_string = attribute_string + attribute.attr + "='" + attribute.val + "' "
+    != '<' + richtool_tag + attribute_string + ' />'
