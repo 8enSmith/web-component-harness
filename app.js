@@ -12,6 +12,14 @@ var richTools = {
             { 'attr': 'correct-answer', 'val': 'London' },
             { 'attr': 'show-answer', 'val': true }
         ]
+    },
+    "2": {
+        name: 'x-product',
+        attributes: [
+            { 'attr': 'data-name', 'val': 'Javascript' },
+            { 'attr': 'data-img', 'val': 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4621/javascript.png' },
+            { 'attr': 'data-url', 'val': 'http://example.com/2' }
+        ]
     }
 }
 
